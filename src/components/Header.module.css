@@ -1,0 +1,22 @@
+.container {
+	height: 200px;
+	background-color: var(--gray-700);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.container > img {
+	margin-right: .75rem;
+}
+
+
+.title {
+	color: var(--blue);
+	font-size: 2.5rem;
+}
+
+
+.title > span {
+	color: var(--purple);
+}

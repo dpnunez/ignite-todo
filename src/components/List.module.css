@@ -1,0 +1,50 @@
+.container {
+	max-width: 736px;
+	margin: auto;
+}
+
+.container > form {
+	display: flex;
+	gap: .5rem;
+	margin-top: -26px;
+}
+
+.container > form > input {
+	background: var(--gray-500);
+	border: 1px solid var(--gray-700);
+	flex: 1;
+	border-radius: 8px;
+	padding: 16px;
+	box-shadow: none;
+}
+
+.container > form > input:focus {
+	border-color: var(--purple-dark);
+}
+
+.container > form button[type="submit"] {
+	color: white;
+	background: var(--blue-dark);
+	padding: 1rem;
+	font-weight: bold;
+	border-radius: 8px;
+	font-size: .875rem;
+	line-height: 140%;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.container > form button[type="submit"]:hover {
+	background: var(--blue);
+}
+
+.container > form button[type="submit"] > svg {
+	margin-left: .5rem;
+}
+
+.container > form button[type="submit"]:disabled {
+	cursor: not-allowed;
+	opacity: .75
+}
