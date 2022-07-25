@@ -16,6 +16,7 @@
 	border-radius: 8px;
 	padding: 16px;
 	box-shadow: none;
+	transition: border 0.2s;
 }
 
 .container > form > input:focus {
@@ -23,6 +24,7 @@
 }
 
 .container > form button[type="submit"] {
+	transition: background 0.2s;
 	color: white;
 	background: var(--blue-dark);
 	padding: 1rem;

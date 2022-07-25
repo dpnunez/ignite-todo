@@ -1,0 +1,58 @@
+.container {
+	padding: 1rem;
+	background: var(--gray-500);
+	border: 1px solid var(--gray-400);
+	list-style-type: none;
+	border-radius: 8px;
+	display: flex;
+	gap: 1rem;
+	cursor: pointer;
+}
+
+.container + .container  {
+	margin-top: .75rem;
+}
+
+.container > p {
+	flex: 1;
+}
+
+.checkmark {
+	width: 1rem;
+	height: 1rem;
+	min-width: 1rem;
+	border-radius: 50%;
+	background-color: transparent;
+	border: 2px solid var(--blue);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.2s;
+}
+
+.checkmark > svg {
+	opacity: 0;
+	color: var(--white);
+}
+
+.checkmark:hover {
+	background-color: var(--blue-dark);
+}
+
+.checked-checked {
+	background-color: var(--purple-dark);
+	border-color: var(--purple-dark);
+}
+
+.checked-checked > svg {
+	opacity: 1;
+}
+
+.checked-checked:hover {
+	background-color: var(--purple);
+	border-color: var(--purple);
+}
+
+.doneParagraph {
+	text-decoration: line-through;
+}

@@ -1,15 +1,21 @@
 import { PlusCircle } from "phosphor-react"
 import { useState, FormEvent, ChangeEvent, InvalidEvent } from "react"
 import styles from './List.module.css'
+import { Task } from "./Task";
 
 
-interface TaskFormat {
+export interface TaskFormat {
 	content: string;
 	done: boolean;
 }
 
 function List() {
-	const [tasks, setTasks] = useState<TaskFormat[]>([])
+	const [tasks, setTasks] = useState<TaskFormat[]>([
+		{
+			content: "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
+			done: false
+		}
+	])
 	const [newTaskText, setNewTaskText] = useState("")
 
 	function handleChangeNewTaskText(event: ChangeEvent<HTMLInputElement>) {
@@ -23,8 +29,26 @@ function List() {
 
 	function handleCreateTask(event: FormEvent) {
 		event.preventDefault()
-		console.log(" oi")
+		setTasks(tasks => [...tasks, { done: false, content: newTaskText }])
+		setNewTaskText('')
 	}
+
+	function toggleTask(taskToChange: TaskFormat) {
+		setTasks(tasks => {
+			return tasks.map(task => {
+				if(task.content === taskToChange.content) {
+					return {...task, done: !task.done}
+				}
+				return task
+			})
+		})
+	}
+
+	function deleteTask(taskToDelete: TaskFormat) {
+		setTasks(tasks => tasks.filter(task => task.content !== taskToDelete.content))
+	}
+
+	const isNewTaskEmpty = !newTaskText
 
 	return (
 		<main className={styles.container}>
@@ -37,7 +61,7 @@ function List() {
 					onInvalid={handleNewCommentInvalid}
 					required
 				/>
-				<button type="submit">
+				<button type="submit" disabled={isNewTaskEmpty}>
 					Criar
 					<PlusCircle size={16}/>
 				</button>
@@ -49,7 +73,7 @@ function List() {
 
 			<ul>
 				{tasks.map(task => (
-					<p>oi</p>
+					<Task key={task.content} deleteTask={deleteTask} content={task.content} done={task.done} toggleTask={toggleTask}  />
 				))}
 			</ul>
 		</main>
