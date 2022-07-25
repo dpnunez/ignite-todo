@@ -15,6 +15,7 @@
 
 .container > p {
 	flex: 1;
+	user-select: none;
 }
 
 .checkmark {

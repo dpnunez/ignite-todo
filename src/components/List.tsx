@@ -1,8 +1,9 @@
-import { PlusCircle } from "phosphor-react"
 import { useState, FormEvent, ChangeEvent, InvalidEvent } from "react"
 import styles from './List.module.css'
 import { Task } from "./Task";
 
+import { PlusCircle } from "phosphor-react"
+import EmptyIcon from '../assets/clipboard.svg'
 
 export interface TaskFormat {
 	content: string;
@@ -10,12 +11,7 @@ export interface TaskFormat {
 }
 
 function List() {
-	const [tasks, setTasks] = useState<TaskFormat[]>([
-		{
-			content: "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
-			done: false
-		}
-	])
+	const [tasks, setTasks] = useState<TaskFormat[]>([])
 	const [newTaskText, setNewTaskText] = useState("")
 
 	function handleChangeNewTaskText(event: ChangeEvent<HTMLInputElement>) {
@@ -48,6 +44,9 @@ function List() {
 		setTasks(tasks => tasks.filter(task => task.content !== taskToDelete.content))
 	}
 
+	const tasksAmount = tasks.length
+	const taskDoneAmount = tasks.filter(task => task.done).length
+
 	const isNewTaskEmpty = !newTaskText
 
 	return (
@@ -66,15 +65,29 @@ function List() {
 					<PlusCircle size={16}/>
 				</button>
 			</form>
-			<div>
-				<p>Total de tarefas criadas</p>
-				<p>Concluidas</p>
-			</div>
+			<section className={styles.reportSection}>
+				<p className={styles.blueText}>
+					Total de tarefas criadas
+					<span className={styles.chipCounter}>{tasksAmount}</span>
+				</p>
+				<p className={styles.purpleText}>
+					Concluidas
+					<span className={styles.chipCounter}>{taskDoneAmount}</span>
+				</p>
+			</section>
 
 			<ul>
-				{tasks.map(task => (
+				{tasks.length ? tasks.map(task => (
 					<Task key={task.content} deleteTask={deleteTask} content={task.content} done={task.done} toggleTask={toggleTask}  />
-				))}
+				)) : (
+					<div className={styles.emptySection}>
+						<img src={EmptyIcon} />
+						<p>
+							<b>Você ainda não tem tarefas cadastradas</b>
+						</p>
+						<p>Crie tarefas e organize seus itens a fazer</p>
+					</div>
+				)}
 			</ul>
 		</main>
 	)
